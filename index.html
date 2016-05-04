@@ -11,25 +11,25 @@
     <body id="scoreKeeper">
         <div id="gameView">
         	<header class="header-display-wrapper">
-        		<div class="header-title">Wisconsin Priemier  -vs-  Other Team</div>
+        		<div id="headerTitle" class="header-title">Score Keeper 1.0 </div>
         	</header>
         	<div class="content-display-wrapper">
         		<div id="sideLeft" class="side sideLeft">
                     <img src="images/vballReal.png" class="bgImg" />
-                    <div class="teamName">Wisconsin Priemier</div>
+                    <div id="leftSideName" class="teamName"></div>
                     <div id="leftSideScore" class="score">0</div>
                 </div>
                 <div id="sideRight" class="side sideRight">
                     <img src="images/vballReal.png" class="bgImg"/>
-                    <div class="teamName">Other Team</div>
+                    <div id="rightSideName" class="teamName"></div>
                     <div id="rightSideScore" class="score" >0</div>
                 </div>
                 <h4>
                     This is where a sub header could go - This is where a sub header could go 
                 </h4>
-                <h6 >
+                <!-- <h6 >
                     This could be another sub section
-                </h6>
+                </h6> -->
         	</div>
         </div>
         <div id="showRight">
@@ -39,13 +39,8 @@
             <span></span>
         </div>
         <nav class="menuRight menuRight-vertical menuRight-right" id="menuRight">
-            <h3>Games</h3>
-            <a href="#">Game 1</a>
-            <a href="#">Game 2</a>
-            <a href="#">Game 3</a>
-            <a href="#">Game 4</a>
-            <a href="#">Game 5</a>
-            <a href="#">Game 6</a>
+            <h3 id="menuRightHeader"><button id="makeNewGame">New</button></h3>
+            <div id="gameListWrapper"></div>
         </nav>
         <footer>Built by <a href="http://kyleuhan.com" title="kyleuhan.com">Kyle Uhan |+ ••|</a></footer>
         <script src="https://cdn.firebase.com/js/client/2.2.5/firebase.js"></script>

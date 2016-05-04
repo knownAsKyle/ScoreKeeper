@@ -12,10 +12,10 @@ var htmlmin = require('gulp-htmlmin');
 
 var opts = {};
 opts.jsGroup = {
-    all: ['scripts/classie.js','scripts/hammer.js','scripts/script.js']
+    all: ['scripts/classie.js','scripts/hammer.js','scripts/sweetalert.min.js','scripts/script.js','scripts/database.module.js']
 };
 opts.cssGroup = {
-    all: ['styles/normalize.css', 'styles/style.css']
+    all: ['styles/normalize.css','styles/sweetalert.css', 'styles/style.css']
 };
 /*tasks*/
 gulp.task('minCss', minCss);
