@@ -1,0 +1,310 @@
+#scoreKeeper{
+	background: white;
+	height: 100vh;
+}
+
+.header-display-wrapper{
+	width: 100%;
+    font-size: 1.1em;
+    /*border-bottom: 1px solid black;*/
+    color: #000;
+  
+    /*margin: 0 0 10px 0px;*/
+/*    background-color: rgba(0, 173, 147,.8);*/
+}
+
+.header-title{
+	font-size: 1.4em;
+	padding: 20px 0px 20px 20px;
+	width: 90%;
+}
+
+.header-row{
+	
+}
+
+.content-display-wrapper{
+	width: 100%;
+	height: 60%;
+}
+
+.side{
+	width: 50%;
+	height: 100%;
+	float: left;
+	text-align: center;
+	text-shadow: 1px 1px 1px black;
+	background:linear-gradient(#00ad93,#fff);
+	background-repeat: repeat;
+	background-position: center;
+}
+
+.sideRight{
+	background:linear-gradient(rgb(0,0,255),#fff);
+}
+.bgImg{
+	position: relative;
+	top: -15px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	box-shadow: 0 0 20px white, inset 0px 0px 20px white;
+}
+.teamName{
+	position: relative;
+	top: -50px;
+	min-height: 150px;
+	color:white;
+	text-shadow: 1px 1px 1px black;
+	font-size: 40px;
+	font-family: 'Lakki Reddy', cursive;
+	overflow: hidden;
+	text-overflow: ellipsis; 
+}
+.score{
+	position: relative;
+	top: -70px;
+	font-size: 80px;
+	font-family: 'Lakki Reddy', cursive;
+	text-shadow: 1px 1px 1px white;
+}
+/*MENU*/
+/*fun hamburger menu thing*/
+
+#showRight {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    top: 5%;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .5s ease-in-out;
+    -moz-transition: .5s ease-in-out;
+    -o-transition: .5s ease-in-out;
+    transition: .5s ease-in-out;
+    cursor: pointer;
+}
+
+#showRight span {
+    display: block;
+    position: absolute;
+    height: 9px;
+    width: 80%;
+    background: #F5F5F5;
+    box-shadow: 0px 0px 2px #000;
+    border-radius: 9px;
+    opacity: 1;
+    left: 0;
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: .25s ease-in-out;
+    -moz-transition: .25s ease-in-out;
+    -o-transition: .25s ease-in-out;
+    transition: .25s ease-in-out;
+}
+
+#showRight span:nth-child(1) {
+    top: 4px;
+}
+
+#showRight span:nth-child(2), #showRight span:nth-child(3) {
+    top: 16px;
+}
+
+#showRight span:nth-child(4) {
+    top: 28px;
+}
+
+#showRight.open span:nth-child(1) {
+    top: 18px;
+    width: 0%;
+    left: 50%;
+}
+
+#showRight.open span:nth-child(2) {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+#showRight.open span:nth-child(3) {
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+
+#showRight.open span:nth-child(4) {
+    top: 18px;
+    width: 0%;
+    left: 50%;
+}
+
+
+#showRight{
+	position: fixed;
+	top: 10px;
+	right: 10px;
+	z-index: 9999;
+}
+
+/*SLIDE OUT MENU*/
+.menuRight {
+	position: fixed;
+	background: #00ad93;
+	color: #fff;
+}
+
+.menuRight h3 {
+	/*color: #afdefa;*/
+	font-size: 1.9em;
+	padding: 20px;
+	margin: 0;
+	font-weight: 300;
+	background: #0d77b6;
+	background: #000;
+}
+
+.menuRight a {
+	display: block;
+	color: #fff;
+	font-size: 1.1em;
+	font-weight: 300;
+}
+
+.menuRight a:hover {
+	background: #258ecd;
+}
+
+.menuRight a:active {
+	background: #afdefa;
+	color: #47a3da;
+}
+
+.menuRight-vertical {
+	width: 300px;
+	height: 100%;
+	top: 0;
+	z-index: 1000;
+}
+
+.menuRight-vertical a {
+	border-bottom: 1px solid #000;
+	padding: 1em;
+}
+
+.menuRight-right {
+	right: -300px;
+}
+
+.menuRight-right.menuRight-open {
+	right: 0px;
+}
+
+.menuRight {
+	-webkit-transition: all 0.3s ease;
+	-moz-transition: all 0.3s ease;
+	transition: all 0.3s ease;
+}
+
+footer{
+	position: fixed;
+	right: 10px;
+	bottom: 6px;
+}
+
+
+@media screen and (max-width: 73.375em) {
+	.header-display-wrapper{
+	    /*margin: 0 0 16px 0px;*/
+	}
+	.header-title{
+		width: 80%;
+	}
+    
+}
+
+@media screen and (max-width: 30.25em) {
+	.header-display-wrapper{
+		/*text-align: center;*/
+	}
+	.header-title{
+		width: 70%;
+	}
+}
+
+/*score keeper*/
+/*body{
+	background: #E3F2FD;
+}
+.headerWrapper{*/
+	/*box-shadow: inset -5px -10px 40px white;*/
+/*	background: #E3F2FD;
+	box-shadow: 0px 20px 20px #E3F2FD;
+}
+
+.lastUpdate,.startDate{
+	font-size: 30px;
+	text-shadow: 1px 1px white;
+	font-family: 'Jaldi', sans-serif;
+}
+
+.update{
+	font-size: 16px;
+}
+
+.mainWrapper{
+	background: #E3F2FD;
+}
+
+.side{
+	background-color: #F44336;
+	text-align: center;*/
+	/*border-radius: 50%;*/
+/*	box-shadow: inset 0px -3px 3px black, inset 0px 2px 1px black;
+}
+
+.side:nth-child(1){
+	background-color: #03A9F4;
+}
+
+.teamName{
+	position: relative;
+	top: -50px;
+	min-height: 150px;
+	color:white;
+	text-shadow: 1px 1px 1px black;
+	font-size: 40px;
+	font-family: 'Lakki Reddy', cursive;
+}
+
+
+.score{
+	position: relative;
+	top: -20px;
+	font-size: 80px;
+	font-family: 'Lakki Reddy', cursive;
+	text-shadow: 1px 1px 1px white;
+}
+
+.bgImg{
+	position: relative;
+	top: -15px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	box-shadow: 0 0 20px white, inset 0px 0px 20px white;
+}
+
+.ng-cloak, [ng-cloak]{
+	display: none;
+}
+
+.swipeCover{
+	
+}*/
