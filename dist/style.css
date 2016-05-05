@@ -1356,9 +1356,46 @@ body.stop-scrolling {
     -o-transform: translateY(145%);
     transform: translateY(145%); } }
 
+@font-face {
+    font-family: 'icomoon';
+    src:    url('fonts/icomoon.eot?6nozif');
+    src:    url('fonts/icomoon.eot?6nozif#iefix') format('embedded-opentype'),
+        url('fonts/icomoon.ttf?6nozif') format('truetype'),
+        url('fonts/icomoon.woff?6nozif') format('woff'),
+        url('fonts/icomoon.svg?6nozif#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    /* use !important to prevent issues with browser extensions that change fonts */
+    font-family: 'icomoon' !important;
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-volleyball:before {
+    content: "\e900";
+}
+.icon-user:before {
+    content: "\e901";
+}
+.icon-radio-unchecked:before {
+    content: "\e902";
+}
+
 #scoreKeeper{
 	background: white;
 	height: 100vh;
+	font-family: 'Slabo 27px', serif;
 }
 
 .header-display-wrapper{
@@ -1415,7 +1452,6 @@ body.stop-scrolling {
 	color:white;
 	text-shadow: 1px 1px 1px black;
 	font-size: 40px;
-	font-family: 'Lakki Reddy', cursive;
 	overflow: hidden;
 	text-overflow: ellipsis; 
 }
@@ -1423,8 +1459,13 @@ body.stop-scrolling {
 	position: relative;
 	top: -70px;
 	font-size: 80px;
-	font-family: 'Lakki Reddy', cursive;
 	text-shadow: 1px 1px 1px white;
+}
+
+
+/*Admin*/
+.adminControlDisplay{
+	display: none;
 }
 /*MENU*/
 /*fun hamburger menu thing*/
@@ -1514,8 +1555,14 @@ body.stop-scrolling {
 /*SLIDE OUT MENU*/
 .menuRight {
 	position: fixed;
+	width: 300px;
+	height: 100%;
+	top: 0;
+	z-index: 1000;
 	background: #00ad93;
 	color: #fff;
+	max-height: 100%;
+    overflow-y: scroll;
 }
 
 .menuRight h3 {
@@ -1524,14 +1571,31 @@ body.stop-scrolling {
 	padding: 20px;
 	margin: 0;
 	font-weight: 300;
+	min-height: 36px;
 	background: #0d77b6;
 	background: #000;
 }
 
-.menuRight h3 button{
+#menuHeaderText{
+	width: 100px;
+}
+
+#makeNewGame{
     color: white;
-    background: rgba(0,0,255,1);
-    border: 1px solid rgba(0,0,255,1);
+    background: rgba(0,0,255,0);
+    border: 1px solid #fff;
+    float: left;
+    margin: 0 30px 0 0;
+}
+
+.userProfile{
+	cursor: pointer;
+    font-size: 1.3em;
+    line-height: 0;
+
+}
+#userProfile{
+	border:1px solid #fff;
 }
 
 .menuRight .gameListItem {
@@ -1540,31 +1604,24 @@ body.stop-scrolling {
 	font-size: 1.1em;
 	font-weight: 300;
 	cursor: pointer;
+	text-align: center;
+	border-bottom: 1px solid #000;
+	padding: 1em 6px;
 }
 
 .menuRight .gameListItem:hover {
 	background: #258ecd;
 }
 
-.menuRight .gameListItem:active {
+.menuRight .gameListItem:active,#userProfile:active, #makeNewGame:active{
 	background: #afdefa;
 	color: #47a3da;
 }
 
-.menuRight-vertical {
-	width: 300px;
-	height: 100%;
-	top: 0;
-	z-index: 1000;
+.menuRight .gameListScoreWrapper{
+	display: block;
 }
-
-.menuRight-vertical .gameListItem {
-	border-bottom: 1px solid #000;
-	padding: 1em;
-}
-
-.menuRight-vertical .gameListScoreWrapper{
-	text-align: center;
+.menuRight .gameListTitleWrapper{
 	display: block;
 }
 
@@ -1595,6 +1652,9 @@ footer{
 	}
 	.header-title{
 		width: 80%;
+	}
+	.menuRight .gameListItem{
+		font-size: 1.3em;
 	}
     
 }

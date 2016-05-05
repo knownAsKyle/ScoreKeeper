@@ -869,7 +869,9 @@ var eles = {
     "makeNewGame": "makeNewGame",
     "leftSideName": "leftSideName",
     "rightSideName": "rightSideName",
-    "headerTitle": "headerTitle"
+    "headerTitle": "headerTitle",
+    "menuHeaderText": "menuHeaderText",
+    "userProfileIconWrapper": "userProfileIconWrapper"
 };
 var ScoreKeeper = ScoreKeeper || {};
 (function () {
@@ -893,6 +895,7 @@ var ScoreKeeper = ScoreKeeper || {};
     ScoreKeeper.currentConnection = {};
     /*ADMIN*/
     ScoreKeeper.admin = {};
+    ScoreKeeper.admin.status = null;
     ScoreKeeper.admin.makeNewGame = function () {
         var team1Name = arguments.length <= 0 || arguments[0] === undefined ? ScoreKeeper.profile.teamName : arguments[0];
         var team2Name = arguments.length <= 1 || arguments[1] === undefined ? "Away Team" : arguments[1];
@@ -906,6 +909,7 @@ var ScoreKeeper = ScoreKeeper || {};
             team2: team2
         };
     };
+    ScoreKeeper.admin.toggleUserProfile = function () {};
     /*VIEWS*/
     ScoreKeeper.views = {};
     ScoreKeeper.views.handleGameClick = function (data) {
@@ -950,37 +954,46 @@ var ScoreKeeper = ScoreKeeper || {};
     };
     ScoreKeeper.views.buildGameList = function (data) {
         var game = document.createElement("div");
+        var titleWrapper = document.createElement("span");
         var scoreWrapper = document.createElement("span");
-        scoreWrapper.className = "gameListScoreWrapper";
+
+        titleWrapper.className = "gameListScoreWrapper";
+        scoreWrapper.className = "gameListTitleWrapper";
         game.className = "gameListItem";
         game.id = data.id;
-        game.appendChild(document.createTextNode(data.name));
+
+        titleWrapper.appendChild(document.createTextNode(data.name));
         scoreWrapper.appendChild(document.createTextNode(data.score));
+
+        game.appendChild(titleWrapper);
         game.appendChild(scoreWrapper);
+
         var h = new Hammer(game);
         h.get('press').set({
             "time": 900
         });
         h.on("press", function (e) {
-            e = e.target.id && e.target.id !== "" ? e : e.target.parentNode;
-            swal({
-                title: "Remove this game?",
-                text: e.target.innerText,
-                type: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#DD6B55",
-                confirmButtonText: "Yes, Remove it!",
-                cancelButtonText: "No, cancel please!",
-                closeOnConfirm: false,
-                closeOnCancel: false
-            }, function (isConfirm) {
-                if (isConfirm) {
-                    ScoreKeeper.dataBase.connection.child(e.target.id).remove();
-                    swal("Deleted!", "Game removed", "success");
-                } else {
-                    swal("Cancelled", "Action stopped, the game is still there!", "error");
-                }
-            });
+            if (ScoreKeeper.admin.status) {
+                e = e.target.id && e.target.id !== "" ? e : e.target.parentNode;
+                swal({
+                    title: "Remove this game?",
+                    text: e.target.innerText,
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "Yes, Remove it!",
+                    cancelButtonText: "No, cancel please!",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                }, function (isConfirm) {
+                    if (isConfirm) {
+                        ScoreKeeper.dataBase.connection.child(e.target.id).remove();
+                        swal("Deleted!", "Game removed", "success");
+                    } else {
+                        swal("Cancelled", "Action stopped, the game is still there!", "error");
+                    }
+                });
+            }
         });
         game.addEventListener("click", ScoreKeeper.views.handleGameClick);
         ScoreKeeper.elements.gameListWrapper.appendChild(game);
@@ -1012,6 +1025,9 @@ var ScoreKeeper = ScoreKeeper || {};
             });
         });
     });
+    ScoreKeeper.elements.userProfileIconWrapper.addEventListener("click", function () {
+        alert("user profile ... coming soon");
+    });
     /*Listen for Swipes*/
     ScoreKeeper.swipe = {};
     ScoreKeeper.swipe.sideLeft = (function () {
@@ -1032,7 +1048,7 @@ var ScoreKeeper = ScoreKeeper || {};
         return direction === 16 ? false : true;
     };
     ScoreKeeper.swipe.handleSwipeLeftSide = function (data) {
-        if (data.direction && (data.direction === 16 || data.direction === 8)) {
+        if (ScoreKeeper.admin.status && data.direction && (data.direction === 16 || data.direction === 8)) {
             (function () {
                 var val = Number(ScoreKeeper.elements.leftSideScore.innerText);
                 if (ScoreKeeper.swipe.checkDirection(data.direction)) {
@@ -1042,14 +1058,16 @@ var ScoreKeeper = ScoreKeeper || {};
                 }
                 ScoreKeeper.currentConnection.update({
                     "team1": val
-                }, function () {
-                    ScoreKeeper.elements.leftSideScore.innerText = val;
+                }, function (err) {
+                    if (!err) {
+                        ScoreKeeper.elements.leftSideScore.innerText = val;
+                    }
                 });
             })();
         }
     };
     ScoreKeeper.swipe.handleSwipeRightSide = function (data) {
-        if (data.direction && (data.direction === 16 || data.direction === 8)) {
+        if (ScoreKeeper.admin.status && data.direction && (data.direction === 16 || data.direction === 8)) {
             (function () {
                 var val = Number(ScoreKeeper.elements.rightSideScore.innerText);
                 if (ScoreKeeper.swipe.checkDirection(data.direction)) {
@@ -1059,14 +1077,54 @@ var ScoreKeeper = ScoreKeeper || {};
                 }
                 ScoreKeeper.currentConnection.update({
                     "team2": val
-                }, function () {
-                    ScoreKeeper.elements.rightSideScore.innerText = val;
+                }, function (err) {
+                    if (!err) {
+                        ScoreKeeper.elements.rightSideScore.innerText = val;
+                    }
                 });
             })();
         }
     };
     ScoreKeeper.swipe.sideLeft.on("swipe", ScoreKeeper.swipe.handleSwipeLeftSide);
     ScoreKeeper.swipe.sideRight.on("swipe", ScoreKeeper.swipe.handleSwipeRightSide);
+    var hammerEvent = new Hammer(ScoreKeeper.elements.menuHeaderText);
+    hammerEvent.get('press').set({
+        "time": 900
+    });
+    hammerEvent.on("press", function (e) {
+        swal({
+            title: "Login",
+            text: "Log into Score Keeper with your code:",
+            type: "input",
+            inputType: "password",
+            showCancelButton: true,
+            closeOnConfirm: true,
+            animation: "slide-from-top",
+            inputPlaceholder: "Code...",
+            inputValue: "admin"
+        }, function (inputValue) {
+            if (inputValue === false) return false;
+            if (inputValue === "") {
+                swal.showInputError("You need to provide your code!");
+                return false;
+            }
+            ScoreKeeper.dataBase.connection.authWithPassword({
+                email: "sample@sample.com",
+                password: inputValue
+            }, function (error, authData) {
+                if (error) {
+                    swal("Error with login!", error, "error");
+                    ScoreKeeper.dataBase.connection.unauth();
+                } else {
+                    swal("Logged in!", "Logged in as Administrator", "success");
+                    classie.toggle(ScoreKeeper.elements.makeNewGame, 'adminControlDisplay');
+                    classie.toggle(ScoreKeeper.elements.menuHeaderText, 'adminControlDisplay');
+                    classie.toggle(ScoreKeeper.elements.userProfileIconWrapper, 'adminControlDisplay');
+                    console.log("Authenticated successfully with payload:", authData);
+                }
+            });
+        });
+    });
 })(eles);
 /***DATABASE Connector***/
 "use strict";
@@ -1090,6 +1148,13 @@ var ScoreKeeper = ScoreKeeper || {};
             });
         }
     };
+
     //Listen for db change;
     ScoreKeeper.dataBase.connection.on("value", ScoreKeeper.dataBase.handleDbConnection);
+    ScoreKeeper.dataBase.connection.onAuth(function (authData) {
+        console.warn("auth status: ", authData);
+        ScoreKeeper.admin.status = authData;
+    });
+
+    ScoreKeeper.dataBase.connection.unauth();
 })();
