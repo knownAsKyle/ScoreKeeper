@@ -4,8 +4,14 @@
         <meta charset="UTF-8"/>
         <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="mobile-web-app-capable" content="yes">
         <title>Score Keeper</title>
-        <link rel="stylesheet" href="styles/normalize.css" />
+        <link rel="icon" sizes="192x192" href="images/vballReal.ico">
+        <link rel="apple-touch-startup-image" href="images/vballReal.ico">
+        <link href='https://fonts.googleapis.com/css?family=Slabo+27px' rel='stylesheet' type='text/css'>
+        <link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="dist/style.css" />
     </head>
     <body id="scoreKeeper">
@@ -24,11 +30,13 @@
                     <div id="rightSideName" class="teamName"></div>
                     <div id="rightSideScore" class="score" >0</div>
                 </div>
-                <h4>
+                <!-- <h4>
                     This is where a sub header could go - This is where a sub header could go 
-                </h4>
+                </h4> -->
                 <!-- <h6 >
                     This could be another sub section
+
+                    <i class="icon-volleyball"></i>
                 </h6> -->
         	</div>
         </div>
@@ -39,7 +47,13 @@
             <span></span>
         </div>
         <nav class="menuRight menuRight-vertical menuRight-right" id="menuRight">
-            <h3 id="menuRightHeader"><button id="makeNewGame">New</button></h3>
+            <h3 id="menuRightHeader">
+                <div id="menuHeaderText">Games</div>
+                <button id="makeNewGame" class="adminControlDisplay">New</button>
+                <div id="userProfileIconWrapper" class="adminControlDisplay userProfile">
+                    <i id="userProfile" class="icon-user"></i>
+                </div>
+            </h3>
             <div id="gameListWrapper"></div>
         </nav>
         <footer>Built by <a href="http://kyleuhan.com" title="kyleuhan.com">Kyle Uhan |+ ••|</a></footer>

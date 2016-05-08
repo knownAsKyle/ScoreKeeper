@@ -9,13 +9,12 @@ var cssMin = require('gulp-minify-css');
 var uglify = require('gulp-uglify');
 var babel = require('gulp-babel');
 var htmlmin = require('gulp-htmlmin');
-
 var opts = {};
 opts.jsGroup = {
-    all: ['scripts/classie.js','scripts/hammer.js','scripts/sweetalert.min.js','scripts/script.js','scripts/database.module.js']
+    all: ['scripts/classie.js', 'scripts/hammer.js', 'scripts/sweetalert.min.js', 'scripts/helper.module.js', 'scripts/profile.module.js', 'scripts/constants.module.js', 'scripts/admin.module.js', 'scripts/elements.module.js', 'scripts/views.module.js', 'scripts/script.js', 'scripts/database.module.js']
 };
 opts.cssGroup = {
-    all: ['styles/normalize.css','styles/sweetalert.css', 'styles/style.css']
+    all: ['styles/normalize.css', 'styles/sweetalert.css', 'styles/style.css']
 };
 /*tasks*/
 gulp.task('minCss', minCss);
@@ -31,33 +30,20 @@ function watch() {
 }
 
 function minHtml() {
-    return gulp.src('index.html')
-        .pipe(htmlmin({
-            removeComments: true,
-            collapseWhitespace: true,
-            conservativeCollapse: true,
-            removeRedundantAttributes: true,
-        }))
-        .pipe(gulp.dest('dist'));
+    return gulp.src('index.html').pipe(htmlmin({
+        removeComments: true,
+        collapseWhitespace: true,
+        conservativeCollapse: true,
+        removeRedundantAttributes: true,
+    })).pipe(gulp.dest('dist'));
 }
 
 function minJs() {
-    return gulp.src(opts.jsGroup.all)
-        .pipe(babel())
-        .pipe(concat('script.js'))
-        .pipe(gulp.dest('./dist'))
-        .pipe(concat('script.min.js'))
-        .pipe(uglify({
-            preserveComments: "some"
-        }))
-        .pipe(gulp.dest('./dist'))
+    return gulp.src(opts.jsGroup.all).pipe(babel()).pipe(concat('script.js')).pipe(gulp.dest('./dist')).pipe(concat('script.min.js')).pipe(uglify({
+        preserveComments: "some"
+    })).pipe(gulp.dest('./dist'))
 }
 
 function minCss() {
-    return gulp.src(opts.cssGroup.all)
-        .pipe(concat('style.css'))
-        .pipe(gulp.dest('./dist'))
-        .pipe(concat('style.min.css'))
-        .pipe(cssMin())
-        .pipe(gulp.dest('./dist'))
+    return gulp.src(opts.cssGroup.all).pipe(concat('style.css')).pipe(gulp.dest('./dist')).pipe(concat('style.min.css')).pipe(cssMin()).pipe(gulp.dest('./dist'))
 }

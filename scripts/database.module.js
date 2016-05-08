@@ -9,15 +9,22 @@ var ScoreKeeper = ScoreKeeper || {};
             if (data && data.forEach) {
                 ScoreKeeper.elements.gameListWrapper.innerHTML = "";
                 data.forEach((child) => {
-                    console.log(child.key(), child.val())
                     ScoreKeeper.views.buildGameList({
                             "id": child.key(),
-                            "name": child.val().team1Name + " -vs- " + child.val().team2Name,
-                            "score": child.val().team1 + "  --  " + child.val().team2
+                            "team1": child.val().team1Name,
+                            "team2": child.val().team2Name,
+                            "score": child.val().team1 + "  --  " + child.val().team2,
+                            "timeStart": child.val().timeStart,
                         })
                 })
             }
         }
+
         //Listen for db change;
     ScoreKeeper.dataBase.connection.on("value", ScoreKeeper.dataBase.handleDbConnection);
+    ScoreKeeper.dataBase.connection.onAuth((authData)=>{
+        ScoreKeeper.admin.status = authData;
+    });
+
+    ScoreKeeper.dataBase.connection.unauth();
 })()

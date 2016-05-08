@@ -1456,6 +1456,7 @@ body.stop-scrolling {
 	text-overflow: ellipsis; 
 }
 .score{
+	font-family: 'Play', sans-serif;
 	position: relative;
 	top: -70px;
 	font-size: 80px;
@@ -1600,15 +1601,35 @@ body.stop-scrolling {
 
 .menuRight .gameListItem {
 	display: block;
-	color: #fff;
+	color: #000;
 	font-size: 1.1em;
 	font-weight: 300;
 	cursor: pointer;
 	text-align: center;
 	border-bottom: 1px solid #000;
-	padding: 1em 6px;
+	background: rgba(255,255,255,.6);
+	padding: 4px 0;
+	width: 100%;
+
 }
 
+.gameList-teamNameOne{
+	text-align: center;
+    padding: 0 0 4px 0;
+}
+.gameList-teamNameTwo{
+	text-align: center;
+    border-bottom: 1px solid white;
+    margin: 0 20px 10px 20px;
+}
+.gameList-scoreWrapper{
+    float: left;
+    padding: 0 0 0 10px;
+}
+.gameList-dateLocation{
+	text-align: right;
+    padding: 0 8px 0 0;
+}
 .menuRight .gameListItem:hover {
 	background: #258ecd;
 }
@@ -1616,13 +1637,6 @@ body.stop-scrolling {
 .menuRight .gameListItem:active,#userProfile:active, #makeNewGame:active{
 	background: #afdefa;
 	color: #47a3da;
-}
-
-.menuRight .gameListScoreWrapper{
-	display: block;
-}
-.menuRight .gameListTitleWrapper{
-	display: block;
 }
 
 .menuRight-right {
